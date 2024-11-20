@@ -49,5 +49,7 @@ spec:
                 secretKeyRef:
                   name: server-secret
                   key: DB_PASSWORD
+            - name: ENABLE_SWAGGER
+              value: "{{ .Values.server.enableSwagger }}"
             - name: PORT
               value: "8000"

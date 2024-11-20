@@ -17,3 +17,4 @@ server:
     rdsHost: "ktb9-rds-instance.cpumy2eao5qo.ap-northeast-2.rds.amazonaws.com"
     rdsPort: "3306"
     rdsName: "ktb9db"
+  enableSwagger: "false" # Swagger 활성화 여부 (true/false)
