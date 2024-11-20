@@ -14,11 +14,11 @@ app.use(cors());
 app.set("port", process.env.PORT || 8000);
 
 app.use("/auth", kakaoRouter);
-// Swagger 문서 서빙 (프로덕션 환경에서는 비활성화)
-if (process.env.ENABLE_SWAGGER === "true") {
-    const { swaggerUi, specs } = require("./module/swagger");
-    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
-}
+// // Swagger 문서 서빙 (프로덕션 환경에서는 비활성화)
+// if (process.env.ENABLE_SWAGGER === "true") {
+//     const { swaggerUi, specs } = require("./module/swagger");
+//     app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+// }
 app.listen(app.get("port"), () => {
     console.log(app.get("port"), "번에서 대기중");
 });
