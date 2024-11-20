@@ -4,23 +4,14 @@ FROM node:23-alpine AS build
 # Step 2: Set working directory
 WORKDIR /usr/src/app
 
-# Step 3: Copy only package files for dependency installation
+# Step 3: Copy only package files to install dependencies
 COPY package*.json ./
 
-# Step 4: Install dependencies (cached if package.json is unchanged)
+# Step 4: Install dependencies
 RUN npm install
 
-# Step 5: Copy only necessary source files
-COPY app.ts ./app.ts
-COPY db.ts ./db.ts
-COPY authorization ./authorization
-COPY config ./config
-COPY controller ./controller
-COPY router ./router
-COPY services ./services
-COPY module ./module
-COPY types ./types
-COPY tsconfig.json ./
+# Step 5: Copy the rest of the application code
+COPY . .
 
 # Step 6: Compile TypeScript code
 RUN npm run build
@@ -41,7 +32,7 @@ RUN npm install --only=production
 # Step 11: Expose the correct port
 EXPOSE 8000
 
-# Step 12: Set environment variables
+# Step 12: Set environment variables (optional)
 ENV NODE_ENV=production
 
 # Step 13: Start the application
