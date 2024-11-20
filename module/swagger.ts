@@ -1,34 +1,39 @@
-const swaggerUi = require("swagger-ui-express");
-const swaggereJsdoc = require("swagger-jsdoc");
+let swaggerUi;
+let specs;
 
-const options = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Ripple Trip Test API",
-      version: "1.0.0",
-      description: "Ripple Trip test API with express",
-    },
-    servers: [
-      {
-        url: "http://localhost:8000",
+if (process.env.ENABLE_SWAGGER === "true") {
+  const swaggerJsdoc = require("swagger-jsdoc");
+  swaggerUi = require("swagger-ui-express");
+
+  const options = {
+    definition: {
+      openapi: "3.0.0",
+      info: {
+        title: "Ripple Trip Test API",
+        version: "1.0.0",
+        description: "Ripple Trip test API with express",
       },
-    ],
-    components: {
-      securitySchemes: {
-        bearerAuth: {
-          type: "http",
-          scheme: "bearer",
-          bearerFormat: "JWT",
+      servers: [
+        {
+          url: process.env.API_SERVER_URL || "http://localhost:8000",
         },
+      ],
+      components: {
+        securitySchemes: {
+          bearerAuth: {
+            type: "http",
+            scheme: "bearer",
+            bearerFormat: "JWT",
+          },
+        },
+        schemas: {},
       },
-      schemas: {},
     },
-  },
-  apis: ["./router/*.ts"],
-};
+    apis: ["./router/*.ts"],
+  };
 
-const specs = swaggereJsdoc(options);
+  specs = swaggerJsdoc(options);
+}
 
 module.exports = {
   swaggerUi,

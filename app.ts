@@ -2,7 +2,13 @@ import express from "express";
 import kakaoRouter from "./router/kakao";
 const cors = require("cors");
 const app = express();
-const { swaggerUi, specs } = require("./module/swagger");
+// Swagger 모듈 로드 (환경 변수에 따라 설정)
+let swaggerUi, specs;
+if (process.env.ENABLE_SWAGGER === "true") {
+    const swaggerModule = require("./module/swagger");
+    swaggerUi = swaggerModule.swaggerUi;
+    specs = swaggerModule.specs;
+}
 
 // 로컬 개발 환경에서만 dotenv 로드
 if (process.env.NODE_ENV !== "production") {
@@ -14,11 +20,11 @@ app.use(cors());
 app.set("port", process.env.PORT || 8000);
 
 app.use("/auth", kakaoRouter);
-// // Swagger 문서 서빙 (프로덕션 환경에서는 비활성화)
-// if (process.env.ENABLE_SWAGGER === "true") {
-//     const { swaggerUi, specs } = require("./module/swagger");
-//     app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
-// }
+// Swagger 문서 서빙 (프로덕션 환경에서는 비활성화)
+if (process.env.ENABLE_SWAGGER === "true") {
+    const { swaggerUi, specs } = require("./module/swagger");
+    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+}
 app.listen(app.get("port"), () => {
     console.log(app.get("port"), "번에서 대기중");
 });
