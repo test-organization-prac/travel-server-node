@@ -17,8 +17,3 @@ server:
     rdsHost: "ktb9-rds-instance.cpumy2eao5qo.ap-northeast-2.rds.amazonaws.com"
     rdsPort: "3306"
     rdsName: "ktb9db"
-
-# Secret 설정
-secret:
-  dbUsername: "a3RiOQ=="
-  dbPassword: "a3Ria3RiMTIzISE="
