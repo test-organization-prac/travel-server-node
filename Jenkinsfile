@@ -4,7 +4,7 @@ pipeline {
     environment {
         REGISTRY = 'ktb9/travel-server-node' // Docker Hub 레지스트리 이름
         IMAGE_TAG = "${env.BUILD_NUMBER}" // 이미지 태그는 빌드 번호로 설정
-        DOCKER_CREDENTIALS = credentials('docker-hub-credentials') // Docker Hub 자격증명
+        DOCKER_CREDENTIALS = credentials('docker-hub-credentials')
     }
 
     stages {
