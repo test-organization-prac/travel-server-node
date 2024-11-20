@@ -4,7 +4,8 @@
   "main": "src/app.ts",
   "scripts": {
     "compile": "tsc && node ./build/app.js",
-    "start": "nodemon -e ts --exec \"npm run compile\""
+    "start": "nodemon -e ts --exec \"npm run compile\"",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",

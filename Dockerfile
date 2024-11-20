@@ -23,7 +23,7 @@ COPY types ./types
 COPY tsconfig.json ./
 
 # Step 6: Compile TypeScript code
-RUN npm run compile
+RUN npm run build
 
 # Step 7: Base image for running the application (final image)
 FROM node:23-alpine
