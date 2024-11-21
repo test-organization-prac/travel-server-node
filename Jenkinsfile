@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/test-organization-prac/travel-server-node.git', credentialsId: 'riffletrip-github-app-prac'
+                git branch: 'main', url: 'https://github.com/test-organization-prac/travel-server-node.git'
             }
         }
 
